@@ -18,3 +18,21 @@ int sum=0;
 }
 
 // TC is O(N.sqrtN) which is better than O(N^2)
+
+
+int sumOfAllDivisors(int n)
+{
+    int ans = 0;
+    int l = 1;
+    while (l <= n)
+    {
+        int val = n / l;
+
+        int r = n / val;
+        ans += ((r * (r + 1)) / 2 - (l * (l - 1)) / 2) * val;
+        l = r + 1;
+
+    }
+    return ans;
+}
+// TC is O(sqrtN) which is best
