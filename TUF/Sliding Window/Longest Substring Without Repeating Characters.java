@@ -47,3 +47,44 @@ class Solution {
         return ans == -1 ? 0 : ans;
     }
 }
+// Approach 2
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int len=s.length();
+        Set<Character>hash=new HashSet<>();
+        int l=0,r=0,ans=0;
+        while(r<len)
+            {
+                char ch=s.charAt(r);
+                while(hash.contains(ch)&&l<r)
+                    {
+                        hash.remove(s.charAt(l));
+                        l++;
+                    }
+                hash.add(ch);
+                ans=Math.max(ans,r-l+1);
+                r++;
+            }
+        return ans;
+    }
+}
+// Best Approach
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int ans=0;
+        int len=s.length();
+        HashMap<Character,Integer>map=new HashMap<>();
+        int l=0,r=0;
+        while(r<len)
+            {
+                char ch=s.charAt(r);
+                if(map.containsKey(ch))
+                    l=Math.max(map.get(ch)+1,l);
+                map.put(ch,r);
+                ans=Math.max(ans,r-l+1);
+                r++;
+            }
+        return ans;
+    }
+}
